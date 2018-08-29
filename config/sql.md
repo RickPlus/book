@@ -17,6 +17,7 @@ CREATE TABLE `bookuser` (
 CREATE TABLE `record` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
   `content` varchar(255) NOT NULL,
   `cost` float(6,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

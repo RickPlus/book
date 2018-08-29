@@ -24,25 +24,25 @@ exports.show = async ctx => {
     var openid = oData.openid;
     const session_key = oData.session_key;
     const unionid = oData.unionid;
-    openid = "3test";
+    openid = code_id;  //todo 测试
     if(!openid){
         ctx.body = "error code";
         return;
     }
 
-        const token = await getToken(app, openid);
+    const userid = await getUserId(app, openid);
+    ctx.session.userid = userid;
     ctx.body = {
-        id : token,
-        token : token
+        id : userid
     };
 };
 
     //检查该用户是否已在服务器注册
     //已注册则返回token
     //未注册则先增加条目，再返回token
-async function getToken(app, openid){
+async function getUserId(app, openid){
     const modelUser = app.model.User;
-    var user = await modelUser.findAll({
+    var user = await modelUser.findOne({
         where : {
             "weixin_openid" : openid
         }
